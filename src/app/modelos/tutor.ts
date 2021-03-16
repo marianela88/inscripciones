@@ -1,6 +1,10 @@
-import { Persona } from "./persona";
+import { Persona } from './persona';
 
 export class Tutor{
     persona: Persona;
-    parentesco: string;
+    relacion: string;
+
+    constructor(){
+        this.persona = new Persona();
+    }
 }

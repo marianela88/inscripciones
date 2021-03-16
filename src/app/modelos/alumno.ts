@@ -1,7 +1,8 @@
-import { Persona } from "./persona";
+import { Persona } from './persona';
 
 export class Alumno{
-    persona: Persona
+    persona: Persona;
+    codigoInscripcion: string;
 
     constructor(){
         this.persona = new Persona();

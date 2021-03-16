@@ -4,7 +4,7 @@
         <div class="card mb-5 mt-5">
           <div class="card-header text-center-bold"><h2>Tutor</h2></div>
           <div class="card-body">
-            <form action="">
+            <form [formGroup]="formTutor" (ngSubmit)="onSubmit()">
   
               <div class="form-row">
                 <div class="form-group col">
@@ -100,13 +100,14 @@
                   <div>
                     <input class="form-control" 
                           type="text"  
-                          formControlName="parentesco">
+                          formControlName="relacion">
                   </div>                
                 </div>
               </div>
   
               <div class="form-group mt-4 d-flex justify-content-end">
-                <button type="button" class="btn btn-primary mr-5" (click)="back()">Anterior</button>
+                <button type="submit" class="btn btn-primary">Alta</button>
+                <button type="button" class="btn btn-primary mr-5" >Anterior</button>
                 <button type="button" class="btn btn-primary">Siguiente</button>
               </div>
             </form>
