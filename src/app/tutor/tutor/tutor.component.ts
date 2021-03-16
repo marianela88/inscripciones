@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Persona } from 'src/app/modelos/persona';
 
 @Component({
   selector: 'app-tutor',
@@ -8,6 +9,8 @@ import { Router } from '@angular/router';
   ]
 })
 export class TutorComponent implements OnInit {
+
+  tutor: Persona = new Persona;
 
   constructor(private router: Router) { }
 

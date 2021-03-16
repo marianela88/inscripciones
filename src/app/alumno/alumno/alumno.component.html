@@ -4,7 +4,7 @@
       <div class="card mb-5 mt-5">
         <div class="card-header text-center-bold"><h2>Alumno</h2></div>
         <div class="card-body">
-          <form action="">
+          <form [formGroup]="formAlumno" (ngSubmit)="onSubmit()">
 
             <div class="form-row">
               <div class="form-group col">
@@ -95,7 +95,7 @@
             </div>
 
             <div class="form-group mt-4 d-flex justify-content-end">
-              <button type="button" class="btn btn-primary" (click)="nextStep()">Siguiente</button>
+              <button type="submit" class="btn btn-primary">Siguiente</button>
             </div>
           </form>
         </div>
