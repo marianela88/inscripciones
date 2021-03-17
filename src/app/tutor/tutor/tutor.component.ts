@@ -68,11 +68,13 @@ export class TutorComponent implements OnInit {
       tutor.persona.localidad = this.formTutor.get('localidad').value;
       tutor.persona.nacionalidad = this.formTutor.get('nacionalidad').value;
       tutor.relacion = this.formTutor.get('relacion').value;
-      console.log(tutor)
-      this.tutorService.agregarAlumno(tutor)
-      .subscribe(tutor => console.log(tutor),
-    error => console.log(error)
-    );
+      localStorage.setItem('datosTutor', JSON.stringify(tutor));
+      this.router.navigateByUrl('inscripcion');
+    //   console.log(tutor)
+    //   this.tutorService.agregarTutor(tutor)
+    //   .subscribe(tutor => console.log(tutor),
+    // error => console.log(error)
+    // );
       
 
 

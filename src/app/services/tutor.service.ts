@@ -13,7 +13,7 @@ export class TutorService {
 
   constructor(private http: HttpClient) { }
 
-  agregarAlumno(tutor: Tutor): Observable<Tutor>{
+  agregarTutor(tutor: Tutor): Observable<Tutor>{
     console.log(tutor);
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(tutor);

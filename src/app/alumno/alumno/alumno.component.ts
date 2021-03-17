@@ -64,10 +64,12 @@ export class AlumnoComponent implements OnInit {
       alumnoCreado.persona.localidad = this.formAlumno.get('localidad').value;
       alumnoCreado.persona.nacionalidad = this.formAlumno.get('nacionalidad').value;
       console.log(alumnoCreado);
-      this.aluservice.agregarAlumno(alumnoCreado)
-      .subscribe(alumnoAgregado => console.log(alumnoAgregado),
-    error => console.log(error)
-    );
+      localStorage.setItem('datosAlumno', JSON.stringify(alumnoCreado));
+      this.router.navigateByUrl('agregartutor');
+    //   this.aluservice.agregarAlumno(alumnoCreado)
+    //   .subscribe(alumnoAgregado => console.log(alumnoAgregado),
+    // error => console.log(error)
+    // );
 
 
 
