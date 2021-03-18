@@ -12,13 +12,18 @@ export class InscripcionService {
 
   constructor(private http: HttpClient) { }
 
-  getEscuelas(): Observable<EscuelasProv> {
-    console.log(EscuelasProv);
-    return this.http.get<EscuelasProv>(`${this.baseUrl}/escuela/`);
+  getEscuelas(): Observable<Escuela[]> {
+   return this.http.get<Escuela[]>(`${this.baseUrl}/escuela/`);
+  }
+  
+  agregarInscripcion(escuela: Escuela): Observable<Escuela>{
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(escuela);
+    console.log(body)
+    return this.http.post<Escuela>( body,{'headers':headers});  
   }
 
+
 }
 
-export class EscuelasProv{
-  escuela: Escuela = new Escuela;
-}
+

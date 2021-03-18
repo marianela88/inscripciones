@@ -4,8 +4,8 @@
         <div class="card mb-5 mt-5">
           <div class="card-header text-center-bold"><h2>Inscripción</h2></div>
           <div class="card-body">
-            <form >
-                <!-- [formGroup]="formInscripcion" (ngSubmit)="onSubmit()" -->
+            <form [formGroup]="formInscripcion" (ngSubmit)="onSubmit()">
+            
               <div class="form-row">
                 <div class="form-group col">
                   <label for="nombre">Curso</label>
@@ -21,7 +21,7 @@
                   <div>
                     <select class="form-control" 
                           type="text"  
-                          formControlName="apellido">
+                          formControlName="nivel_educativo">
                       <option value="" selected disabled>Seleccione un Nivel</option>
                       <option value="1">Inicial</option>
                       <option value="2">Primario</option>
@@ -70,10 +70,10 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr *ngFor="let escuelas of escuela">
-                                      <td>{{escuelas.nombre}} </td>
+                                    <tr *ngFor="let escuela of escuelas">
+                                      <td>{{escuela.nombre}} </td>
                                       <td>
-                                        <button  (click)="agregar(escuelas)" class="btn btn-info" data-dismiss="modal">Agregar</button>
+                                        <button  (click)="agregar(escuela)" class="btn btn-info" data-dismiss="modal">Agregar</button>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -99,12 +99,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- <tr *ngFor="let producto of this.remito.lineas; let posicionLinea= index">
-                    <td>{{producto.producto.id}}</td>
+                  <tr *ngFor="let escuela of this.inscripcion.institucion; let posicionLinea= index">
+                    <td>{{escuela.escuela.id}}</td>
+                    <td>{{escuela.escuela.nombre}}</td>
                                        
                     <td><button class="btn btn-danger btn-sm" type="button"
-                      (click)="eliminarItem(producto.producto.id)">X</button></td>
-                  </tr> -->
+                      (click)="eliminarItem(escuela.escuela.id)">X</button></td>
+                  </tr>
                 </tbody>
               </table>   
     

@@ -5,38 +5,37 @@ import { Tutor } from "./tutor";
 export class Inscripcion{
     alumno: Alumno;
     tutor: Tutor;
-    institucion: Array<Escuela>;
+    institucion: Array<Lineas>;
     curso: string;
     nivel_educativo: string;
 
     constructor(){
         this.alumno = this.alumno
         this.tutor = this.tutor
-        this.institucion = Array<Escuela>();
+        this.institucion = Array<Lineas>();
         this.curso = this.curso
         this.nivel_educativo = this.nivel_educativo
     }
 
-    // agregarEscuelaFila(escuela: Escuela){
+    agregarEscuelaFila(escuela: Escuela){
 
-    //     let lineas: Inscripcion = new Inscripcion();
-    //     lineas.institucion = this.institucion;
+        let institucion: Lineas = new Lineas();
+        institucion.escuela = escuela;
                     
-    //       let existe: number = this.lineas.filter(x => x.producto.id == producto.id).length
+          this.institucion.filter(x => x.escuela.id == escuela.id).length      
 
-  
-    //       if(existe > 0){
-
-    //         let posicion: number = this.lineas.findIndex(x => x.producto.id == producto.id)
-    //         this.lineas[posicion].cantidad = this.lineas[posicion].cantidad++;
-            
-    //       }
-    //       else{
-
-    //         console.log(lineas)
+            console.log(institucion)
               
-    //         this.lineas.push(lineas);
-    //       }        
-    // }
+            this.institucion.push(institucion);
+             
+    }
 
+}
+
+export class Lineas{
+    escuela: Escuela;
+
+    constructor(){
+        this.escuela = this.escuela;
+    }
 }
