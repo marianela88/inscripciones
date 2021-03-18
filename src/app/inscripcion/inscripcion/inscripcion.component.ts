@@ -17,7 +17,7 @@ export class InscripcionComponent implements OnInit {
   escuelasBuscadas: Escuela[];
   inscripcion: Inscripcion;
   submitted = false;
-  
+  escuelaSeleccionada: Escuela;
 
   constructor(private inscripcionservice: InscripcionService, private fb: FormBuilder) { }
 
@@ -29,28 +29,26 @@ export class InscripcionComponent implements OnInit {
       curso: ['', Validators.required],
       nivel_educativo: ['', Validators.required],
     })
-    
   }
 
-  buscarEscuela(nombreBuscar){
-   
-    this.escuelas = this.escuelas.filter(escuela=>{
-      
+  buscarEscuela(nombreBuscar): void{
+    this.escuelas = this.escuelas.filter(escuela => {
       return escuela.nombre.toLocaleLowerCase().includes(nombreBuscar.toLocaleLowerCase());
-    }) 
-    console.log(this.escuelas) 
+    });
+  }
+
+  cargarEscuelas(): void{
+    this.inscripcionservice.getEscuelas().subscribe(data => {this.escuelas = data; });
   }
 
 
-  agregar(escuela: Escuela){
-    
-    this.inscripcion.agregarEscuelaFila(escuela);
+  agregar(escuela: Escuela): void{
+    this.escuelaSeleccionada = escuela;
   }
 
-  eliminarItem(id: number): void {
+  eliminarItem(): void {
 
-    console.log(id);
-    this.inscripcion.institucion = this.inscripcion.institucion.filter((item: Lineas) => id !== item.escuela.id);
+    this.escuelaSeleccionada = null;
   }
 
   onSubmit() {

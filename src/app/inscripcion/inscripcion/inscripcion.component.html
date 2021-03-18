@@ -34,7 +34,7 @@
               <div class="form-row">
                 <div class="form-group col">
                   <span class="input-group">
-                    <button class="btn btn-outline-secondary" id="button-addon1" type="button" data-toggle="modal" data-target="#modalEscuela">
+                    <button class="btn btn-outline-secondary" (click)="cargarEscuelas()" id="button-addon1" type="button" data-toggle="modal" data-target="#modalEscuela">
                       Buscar Establecimiento
                     </button>
                   </span>
@@ -91,7 +91,7 @@
                     <!-- Modal -->
               </div>
   
-              <table class="table table-borderless table-hover table-sm">
+              <table  *ngIf="escuelaSeleccionada"  class="table table-borderless table-hover table-sm">
                 <thead>
                   <tr>
                     <th>Escuela Id</th>
@@ -99,12 +99,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let escuela of this.inscripcion.institucion; let posicionLinea= index">
-                    <td>{{escuela.escuela.id}}</td>
-                    <td>{{escuela.escuela.nombre}}</td>
+                  <tr>
+                    <td>{{escuelaSeleccionada.id}}</td>
+                    <td>{{escuelaSeleccionada.nombre}}</td>
                                        
                     <td><button class="btn btn-danger btn-sm" type="button"
-                      (click)="eliminarItem(escuela.escuela.id)">X</button></td>
+                      (click)="eliminarItem()">X</button></td>
                   </tr>
                 </tbody>
               </table>   
