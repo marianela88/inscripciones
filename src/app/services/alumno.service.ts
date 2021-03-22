@@ -14,10 +14,9 @@ export class AlumnoService {
   constructor(private http: HttpClient) { }
 
   agregarAlumno(alumno: Alumno): Observable<Alumno>{
-    console.log(alumno);
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(alumno);
     console.log(body)
-    return this.http.post<Alumno>(`${this.baseUrl}/alumnos/`, body,{'headers':headers});  
+    return this.http.post<Alumno>(`${this.baseUrl}/alumnos/`, body,{'headers':headers});
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Escuela } from 'src/app/modelos/escuela';
-import { Inscripcion, Lineas } from 'src/app/modelos/inscripcion'
+import { Inscripcion } from 'src/app/modelos/inscripcion'
 import {  InscripcionService } from 'src/app/services/inscripcion.service';
 
 @Component({
@@ -53,11 +53,18 @@ export class InscripcionComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    //this.guardar();
+    this.guardar();
 
   }
 
   guardar(){
+    let alumno_id = localStorage.getItem('datosAlumno');
+    let tutor_id = localStorage.getItem('datosTutor');
+
+    console.log(alumno_id)
+    
+    this.inscripcion.tutor_id = tutor_id;
+    this.inscripcion.alumno_id = alumno_id;
     this.inscripcion.curso = this.formInscripcion.get('curso').value;
     this.inscripcion.nivel_educativo = this.formInscripcion.get('nivel_educativo').value;
     // this.inscripcionservice.agregarInscripcion(this.escuela).subscribe(inscripcionadd => console.log(inscripcionadd),

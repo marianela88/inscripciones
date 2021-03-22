@@ -37,15 +37,6 @@ export class AlumnoComponent implements OnInit {
 
   }
 
-  // nextStep(){
-
-  //   if(this.alumno.nombre != "" && this.alumno.apellido != "" && this.alumno.dni != null && this.alumno.fecnac != null && this.alumno.telefono != null && this.alumno.email != "" && this.alumno.localidad != "" && this.alumno.departamento != "" && this.alumno.nacionalidad != "" ){
-
-  //         this.alumno = this.alumno;}
-
-  //         this.router.navigateByUrl('/agregartutor');
-  // }
-
   onSubmit(): void {
     this.submitted = true;
     this.guardar();
@@ -64,15 +55,12 @@ export class AlumnoComponent implements OnInit {
       alumnoCreado.persona.localidad = this.formAlumno.get('localidad').value;
       alumnoCreado.persona.nacionalidad = this.formAlumno.get('nacionalidad').value;
       console.log(alumnoCreado);
-      localStorage.setItem('datosAlumno', JSON.stringify(alumnoCreado));
-      this.router.navigateByUrl('agregartutor');
-    //   this.aluservice.agregarAlumno(alumnoCreado)
-    //   .subscribe(alumnoAgregado => console.log(alumnoAgregado),
-    // error => console.log(error)
-    // );
+      this.aluservice.agregarAlumno(alumnoCreado)
+      .subscribe(data => console.log(data.persona.id),
+    error => console.log(error)
+      );
 
-
-
+    this.router.navigateByUrl('agregartutor');
   }
 
 }

@@ -39,15 +39,6 @@ export class TutorComponent implements OnInit {
 
   }
 
-  // nextStep(){
-
-  //   if(this.alumno.nombre != "" && this.alumno.apellido != "" && this.alumno.dni != null && this.alumno.fecnac != null && this.alumno.telefono != null && this.alumno.email != "" && this.alumno.localidad != "" && this.alumno.departamento != "" && this.alumno.nacionalidad != "" ){
-
-  //         this.alumno = this.alumno;}
-
-  //         this.router.navigateByUrl('/agregartutor');
-  // }
-
   onSubmit() {
     this.submitted = true;
     this.guardar();
@@ -70,11 +61,11 @@ export class TutorComponent implements OnInit {
       tutor.relacion = this.formTutor.get('relacion').value;
       localStorage.setItem('datosTutor', JSON.stringify(tutor));
       this.router.navigateByUrl('inscripcion');
-    //   console.log(tutor)
-    //   this.tutorService.agregarTutor(tutor)
-    //   .subscribe(tutor => console.log(tutor),
-    // error => console.log(error)
-    // );
+      console.log(tutor)
+      this.tutorService.agregarTutor(tutor)
+      .subscribe(tutor => console.log(tutor),
+    error => console.log(error)
+    );
       
 
 
