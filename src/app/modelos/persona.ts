@@ -1,9 +1,9 @@
 export class Persona{
-    id:number;
+    id: number;
     nombre: string;
     apellido: string;
-    dni: number;
-    fecnac: Date;
+    documento: number;
+    fecha_nacimiento: Date;
     telefono: number;
     email: string;
     localidad: string;

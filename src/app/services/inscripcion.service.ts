@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Escuela } from '../modelos/escuela';
+import { Inscripcion } from '../modelos/inscripcion';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,21 @@ export class InscripcionService {
   getEscuelas(): Observable<Escuela[]> {
    return this.http.get<Escuela[]>(`${this.baseUrl}/escuela/`);
   }
-  
-  agregarInscripcion(escuela: Escuela): Observable<Escuela>{
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(escuela);
-    console.log(body)
-    return this.http.post<Escuela>( body,{'headers':headers});  
+
+  agregarInscripcion(inscripcion: Inscripcion): Observable<Inscripcion>{
+
+    const objectInstitucion = {
+      alumno_id: inscripcion.alumnoId,
+      tutor_id: inscripcion.tutorId,
+      institucion_id: inscripcion.institucionId,
+      curso: inscripcion.curso,
+      nivel_educativo: inscripcion.nivelEducativo
+    };
+
+    const headers = { 'content-type': 'application/json'};
+    const body = JSON.stringify(objectInstitucion);
+    console.log(body);
+    return this.http.post<Inscripcion>(`${this.baseUrl}/inscripciones/`, body, { 'headers': headers});
   }
 
 

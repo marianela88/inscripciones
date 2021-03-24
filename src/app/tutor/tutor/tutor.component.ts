@@ -45,14 +45,13 @@ export class TutorComponent implements OnInit {
 
   }
 
-  guardar(){
+  guardar(): void{
     
       let tutor = new Tutor();
-      
       tutor.persona.nombre = this.formTutor.get('nombre')?.value;
       tutor.persona.apellido = this.formTutor.get('apellido').value;
-      tutor.persona.dni = this.formTutor.get('dni').value;
-      tutor.persona.fecnac = this.formTutor.get('fecnac').value;
+      tutor.persona.documento = this.formTutor.get('dni').value;
+      tutor.persona.fecha_nacimiento = this.formTutor.get('fecnac').value;
       tutor.persona.email = this.formTutor.get('email').value;
       tutor.persona.telefono = this.formTutor.get('telefono').value;
       tutor.persona.departamento = this.formTutor.get('dpto').value;
@@ -61,13 +60,7 @@ export class TutorComponent implements OnInit {
       tutor.relacion = this.formTutor.get('relacion').value;
       localStorage.setItem('datosTutor', JSON.stringify(tutor));
       this.router.navigateByUrl('inscripcion');
-      console.log(tutor)
-      this.tutorService.agregarTutor(tutor)
-      .subscribe(tutor => console.log(tutor),
-    error => console.log(error)
-    );
-      
-
+      console.log(tutor);
 
 
   }

@@ -47,20 +47,17 @@ export class AlumnoComponent implements OnInit {
       let alumnoCreado = new Alumno();
       alumnoCreado.persona.nombre = this.formAlumno.get('nombre')?.value;
       alumnoCreado.persona.apellido = this.formAlumno.get('apellido').value;
-      alumnoCreado.persona.dni = this.formAlumno.get('dni').value;
-      alumnoCreado.persona.fecnac = this.formAlumno.get('fecnac').value;
+      alumnoCreado.persona.documento = this.formAlumno.get('dni').value;
+      alumnoCreado.persona.fecha_nacimiento = this.formAlumno.get('fecnac').value;
       alumnoCreado.persona.email = this.formAlumno.get('email').value;
       alumnoCreado.persona.telefono = this.formAlumno.get('telefono').value;
       alumnoCreado.persona.departamento = this.formAlumno.get('dpto').value;
       alumnoCreado.persona.localidad = this.formAlumno.get('localidad').value;
       alumnoCreado.persona.nacionalidad = this.formAlumno.get('nacionalidad').value;
-      console.log(alumnoCreado);
-      this.aluservice.agregarAlumno(alumnoCreado)
-      .subscribe(data => console.log(data.persona.id),
-    error => console.log(error)
-      );
 
-    this.router.navigateByUrl('agregartutor');
+      localStorage.setItem('datosAlumno', JSON.stringify(alumnoCreado));
+      console.log(alumnoCreado);
+      this.router.navigateByUrl('agregartutor');
   }
 
 }

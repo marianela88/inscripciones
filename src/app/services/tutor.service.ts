@@ -13,11 +13,9 @@ export class TutorService {
 
   constructor(private http: HttpClient) { }
 
-  agregarTutor(tutor: Tutor): Observable<Tutor>{
-    console.log(tutor);
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(tutor);
-    console.log(body)
-    return this.http.post<Tutor>(`${this.baseUrl}/tutor/`, body,{'headers':headers});  
+
+  saveTutor(payload): Observable<Tutor>{
+    const headers = { 'content-type': 'application/json'};
+    return this.http.post<Tutor>(`${this.baseUrl}/tutor/`, payload, {'headers': headers});
   }
 }

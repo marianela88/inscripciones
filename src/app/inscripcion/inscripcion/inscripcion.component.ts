@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Escuela } from 'src/app/modelos/escuela';
-import { Inscripcion } from 'src/app/modelos/inscripcion'
+import { Inscripcion } from 'src/app/modelos/inscripcion';
+import { AlumnoService } from 'src/app/services/alumno.service';
 import {  InscripcionService } from 'src/app/services/inscripcion.service';
+import { TutorService } from 'src/app/services/tutor.service';
+import {concatMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-inscripcion',
@@ -19,16 +22,19 @@ export class InscripcionComponent implements OnInit {
   submitted = false;
   escuelaSeleccionada: Escuela;
 
-  constructor(private inscripcionservice: InscripcionService, private fb: FormBuilder) { }
+  constructor(private inscripcionService: InscripcionService,
+              private alumnoService: AlumnoService,
+              private tutorService: TutorService,
+              private fb: FormBuilder) { }
 
   ngOnInit(): void {
 
-    this.inscripcionservice.getEscuelas().subscribe(data => {this.escuelas = data});
+    this.inscripcionService.getEscuelas().subscribe(data => {this.escuelas = data; });
 
     this.formInscripcion = this.fb.group({
       curso: ['', Validators.required],
       nivel_educativo: ['', Validators.required],
-    })
+    });
   }
 
   buscarEscuela(nombreBuscar): void{
@@ -38,7 +44,7 @@ export class InscripcionComponent implements OnInit {
   }
 
   cargarEscuelas(): void{
-    this.inscripcionservice.getEscuelas().subscribe(data => {this.escuelas = data; });
+    this.inscripcionService.getEscuelas().subscribe(data => {this.escuelas = data; });
   }
 
 
@@ -51,25 +57,40 @@ export class InscripcionComponent implements OnInit {
     this.escuelaSeleccionada = null;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
     this.guardar();
 
   }
 
-  guardar(){
-    let alumno_id = localStorage.getItem('datosAlumno');
-    let tutor_id = localStorage.getItem('datosTutor');
+  guardar(): void {
+    const alumnoPayload = localStorage.getItem('datosAlumno');
+    const tutorPayload = localStorage.getItem('datosTutor');
 
-    console.log(alumno_id)
-    
-    this.inscripcion.tutor_id = tutor_id;
-    this.inscripcion.alumno_id = alumno_id;
+    this.inscripcion = new Inscripcion();
+
+  //   this.tutorService.saveTutor(tutorPayload).subscribe( objectTutor => this.inscripcion.tutorId = objectTutor.persona.id);
+  //   this.alumnoService.saveAlumno(alumnoPayload).subscribe( objectAlumno => this.inscripcion.alumnoId = objectAlumno.persona.id);
+
+
     this.inscripcion.curso = this.formInscripcion.get('curso').value;
-    this.inscripcion.nivel_educativo = this.formInscripcion.get('nivel_educativo').value;
-    // this.inscripcionservice.agregarInscripcion(this.escuela).subscribe(inscripcionadd => console.log(inscripcionadd),
-    // error => console.log(error)
-    // );
+    this.inscripcion.institucionId = this.escuelaSeleccionada.id;
+    this.inscripcion.nivelEducativo = this.formInscripcion.get('nivel_educativo').value;
+  //   console.log(this.inscripcion)
+  //   this.inscripcionservice.agregarInscripcion(this.inscripcion).subscribe(inscripcionadd => console.log(inscripcionadd),
+  //    error => console.log(error)
+  //  );
+    this.alumnoService.saveAlumno(alumnoPayload)
+          .pipe(
+            tap((res) => this.inscripcion.alumnoId = res.persona.id),
+            concatMap((res) => this.tutorService.saveTutor(tutorPayload)),
+            tap((res) => this.inscripcion.tutorId = res.persona.id),
+            concatMap(() => this.inscripcionService.agregarInscripcion(this.inscripcion)),
+            tap((res) => console.log(res))
+          )
+          .subscribe(res => console.log(res));
   }
 
 }
+
+
