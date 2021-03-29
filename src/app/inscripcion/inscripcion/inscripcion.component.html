@@ -12,7 +12,11 @@
                   <div>
                     <input class="form-control" 
                           type="text"  
-                          formControlName="curso">
+                          formControlName="curso"
+                          [class.is-invalid]="cursoInvalido">
+                          <small *ngIf="cursoInvalido" class="text-danger">
+                                  Debes ingresar un Curso. 
+                          </small>
                   </div>                
                 </div>
   
@@ -21,7 +25,11 @@
                   <div>
                     <select class="form-control" 
                           type="text"  
-                          formControlName="nivel_educativo">
+                          formControlName="nivel_educativo"
+                          [class.is-invalid]="nivelInvalido">
+                          <small *ngIf="nivelInvalido" class="text-danger">
+                                  Debes seleccionar un Nivel Educativo. 
+                          </small>
                       <option value="" selected disabled>Seleccione un Nivel</option>
                       <option value="1">Inicial</option>
                       <option value="2">Primario</option>

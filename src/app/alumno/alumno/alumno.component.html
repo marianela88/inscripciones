@@ -4,7 +4,7 @@
       <div class="card mb-5 mt-5">
         <div class="card-header text-center-bold"><h2>Alumno</h2></div>
         <div class="card-body">
-          <form [formGroup]="formAlumno" (ngSubmit)="onSubmit()">
+          <form [formGroup]="formAlumno" (ngSubmit)="onSubmit()" novalidate>
 
             <div class="form-row">
               <div class="form-group col">
@@ -12,7 +12,11 @@
                 <div>
                   <input class="form-control" 
                         type="text"  
-                        formControlName="nombre">
+                        formControlName="nombre"
+                        [class.is-invalid]="nombreInvalido">
+                  <small *ngIf="nombreInvalido" class="text-danger">
+                          Debe ingresar un nombre. 
+                  </small>
                 </div>                
               </div>
 
@@ -21,7 +25,11 @@
                 <div>
                   <input class="form-control" 
                         type="text"  
-                        formControlName="apellido">
+                        formControlName="apellido"
+                        [class.is-invalid]="apellidoInvalido">
+                  <small *ngIf="apellidoInvalido" class="text-danger">
+                          Debe ingresar un apellido. 
+                  </small>
                 </div>                
               </div>
             </div>
@@ -32,7 +40,11 @@
                 <div>
                   <input class="form-control" 
                         type="text"  
-                        formControlName="dni">
+                        formControlName="dni"
+                        [class.is-invalid]="dniInvalido">
+                  <small *ngIf="dniInvalido" class="text-danger">
+                          Debe ingresar un dni, sin puntos. 
+                  </small>
                 </div>                
               </div>
 
@@ -41,7 +53,9 @@
                 <div>
                   <input class="form-control" 
                         type="date"  
-                        formControlName="fecnac">
+                        formControlName="fecnac"
+                        [class.is-invalid]="fechaNovalida">
+                <small *ngIf="fechaNovalida" class="text-danger">Debe seleccionar una fecha.</small>
                 </div>                
               </div>
             </div>
@@ -52,7 +66,9 @@
                 <div>
                   <input class="form-control" 
                         type="text"  
-                        formControlName="telefono">
+                        formControlName="telefono"
+                        [class.is-invalid]="telInvalido">
+                <small *ngIf="telInvalido" class="text-danger">Debe ingresar un N° de Teléfono.</small>
                 </div>                
               </div>
 
@@ -61,7 +77,9 @@
                 <div>
                   <input class="form-control" 
                         type="email"  
-                        formControlName="email">
+                        formControlName="email"
+                        [class.is-invalid]="emailNoValido">
+                <small *ngIf="emailNoValido" class="text-danger">Debe ingresar un email válido.</small>
                 </div>                
               </div>
             </div>
@@ -72,7 +90,11 @@
                 <div>
                   <input class="form-control" 
                         type="text"  
-                        formControlName="localidad">
+                        formControlName="localidad"
+                        [class.is-invalid]="locNoValida">
+                  <small *ngIf="locNoValida" class="text-danger">
+                          Debe ingresar una Localidad. 
+                  </small>
                 </div>                
               </div>
 
@@ -81,7 +103,11 @@
                 <div>
                   <input class="form-control" 
                         type="text"  
-                        formControlName="dpto">
+                        formControlName="dpto"
+                        [class.is-invalid]="dptoNoValida">
+                  <small *ngIf="dptoNoValida" class="text-danger">
+                          Debe ingresar un Departamento. 
+                  </small>
                 </div>                
               </div>
               <div class="form-group col">
@@ -89,13 +115,17 @@
                 <div>
                   <input class="form-control" 
                         type="text"  
-                        formControlName="nacionalidad">
+                        formControlName="nacionalidad"
+                        [class.is-invalid]="nacNoValida">
+                  <small *ngIf="nacNoValida" class="text-danger">
+                          Debe ingresar una Nacionalidad. 
+                  </small>
                 </div>                
               </div>
             </div>
 
             <div class="form-group mt-4 d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary">Siguiente</button>
+              <button class="btn btn-primary" [disabled]="formAlumno.invalid">Siguiente</button>
             </div>
           </form>
         </div>

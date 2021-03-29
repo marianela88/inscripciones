@@ -16,6 +16,7 @@ export class TutorComponent implements OnInit {
   submitted = false;
   loading: boolean = false;
   errorMessage;
+  error: boolean;
 
   constructor(private router: Router, private fb: FormBuilder, private tutorService: TutorService) { }
 
@@ -25,19 +26,63 @@ export class TutorComponent implements OnInit {
     this.errorMessage = "";
 
     this.formTutor = new FormGroup({
-      nombre: new FormControl(),
-      apellido: new FormControl(),
-      dni: new FormControl(),
-      fecnac: new FormControl(),
-      email: new FormControl(),
-      telefono: new FormControl(),
-      localidad: new FormControl(),
-      dpto: new FormControl(),
-      nacionalidad: new FormControl(),
-      relacion: new FormControl()
+      nombre: new FormControl('', [Validators.required]),
+      apellido: new FormControl('', [Validators.required]),
+      dni: new FormControl('', [Validators.required]),
+      fecnac: new FormControl('', [Validators.required]),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+      telefono: new FormControl('', [Validators.required]),
+      localidad: new FormControl('', [Validators.required]),
+      dpto: new FormControl('', [Validators.required]),
+      nacionalidad: new FormControl('', [Validators.required]),
+      relacion: new FormControl('', [Validators.required]),
     })
 
   }
+
+
+  get nombreInvalido(){
+    return this.formTutor.get('nombre').invalid && this.formTutor.get('nombre').touched;
+  }
+
+  get apellidoInvalido(){
+    return this.formTutor.get('apellido').invalid && this.formTutor.get('apellido').touched;
+  }
+
+  get dniInvalido(){
+    return this.formTutor.get('dni').invalid && this.formTutor.get('dni').touched;
+  }
+
+  get fechaNovalida(){
+    return this.formTutor.get('fecnac').invalid && this.formTutor.get('fecnac').touched;
+  }
+
+  get telInvalido(){
+    return this.formTutor.get('telefono').invalid && this.formTutor.get('telefono').touched;
+  }
+
+  get emailNoValido(){
+    return this.formTutor.get('email').invalid && this.formTutor.get('email').touched;
+  }
+
+  get locNoValida(){
+    return this.formTutor.get('localidad').invalid && this.formTutor.get('localidad').touched;
+  }
+
+  get dptoNoValida(){
+    return this.formTutor.get('dpto').invalid && this.formTutor.get('dpto').touched;
+  }
+
+  get nacNoValida(){
+    return this.formTutor.get('nacionalidad').invalid && this.formTutor.get('nacionalidad').touched;
+  }
+
+  get parentescoNoValida(){
+    return this.formTutor.get('relacion').invalid && this.formTutor.get('relacion').touched;
+  }
+
 
   onSubmit() {
     this.submitted = true;
@@ -63,6 +108,10 @@ export class TutorComponent implements OnInit {
       console.log(tutor);
 
 
+  }
+
+  volver(){
+    this.router.navigateByUrl('agregaralumno');
   }
 
 }

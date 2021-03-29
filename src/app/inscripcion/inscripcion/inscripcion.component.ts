@@ -37,6 +37,14 @@ export class InscripcionComponent implements OnInit {
     });
   }
 
+  get cursoInvalido(){
+    return this.formInscripcion.get('curso').invalid && this.formInscripcion.get('curso').touched;
+  }
+
+  get nivelInvalido(){
+    return this.formInscripcion.get('nivel_educativo').invalid && this.formInscripcion.get('nivel_educativo').touched;
+  }
+
   buscarEscuela(nombreBuscar): void{
     this.escuelas = this.escuelas.filter(escuela => {
       return escuela.nombre.toLocaleLowerCase().includes(nombreBuscar.toLocaleLowerCase());
@@ -69,17 +77,11 @@ export class InscripcionComponent implements OnInit {
 
     this.inscripcion = new Inscripcion();
 
-  //   this.tutorService.saveTutor(tutorPayload).subscribe( objectTutor => this.inscripcion.tutorId = objectTutor.persona.id);
-  //   this.alumnoService.saveAlumno(alumnoPayload).subscribe( objectAlumno => this.inscripcion.alumnoId = objectAlumno.persona.id);
-
 
     this.inscripcion.curso = this.formInscripcion.get('curso').value;
     this.inscripcion.institucionId = this.escuelaSeleccionada.id;
     this.inscripcion.nivelEducativo = this.formInscripcion.get('nivel_educativo').value;
-  //   console.log(this.inscripcion)
-  //   this.inscripcionservice.agregarInscripcion(this.inscripcion).subscribe(inscripcionadd => console.log(inscripcionadd),
-  //    error => console.log(error)
-  //  );
+ 
     this.alumnoService.saveAlumno(alumnoPayload)
           .pipe(
             tap((res) => this.inscripcion.alumnoId = res.persona.id),
